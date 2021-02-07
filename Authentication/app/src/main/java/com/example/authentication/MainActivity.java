@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
                     url = new URL("https://httpbin.org/basic-auth/bob/sympa");
                     HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                     // Create the authentication with encoding login and password
-                    String basicAuth = "Basic " + Base64.encodeToString("bob:sympa".getBytes(), Base64.NO_WRAP);
+                    String basicAuth = "Basic " + Base64.encodeToString((login.getText() + ":"
+                            + password.getText()).getBytes(), Base64.NO_WRAP);
                     urlConnection.setRequestProperty ("Authorization", basicAuth);
                     // Open the connection
                     try {
