@@ -63,5 +63,6 @@
             android:layout_height="wrap_content"
             android:onClick="onAuthenticate"
             android:text="@string/authenticate" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,14 +3,17 @@ package com.example.authentication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -24,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAuthenticate(View v) {
+        // Retrieve the login enter by the user
+        final EditText login = findViewById(R.id.login);
+        // Retrieve the password enter by the user
+        final EditText password = findViewById(R.id.password);
 
         // Creation of the thread
         new Thread() {
@@ -33,9 +40,12 @@ public class MainActivity extends AppCompatActivity {
                 URL url;
                 try {
                     // Creation of the url to access to the website
-                    url = new URL("https://www.android.com/");
-                    // Open the connection
+                    url = new URL("https://httpbin.org/basic-auth/bob/sympa");
                     HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                    // Create the authentication with encoding login and password
+                    String basicAuth = "Basic " + Base64.encodeToString("bob:sympa".getBytes(), Base64.NO_WRAP);
+                    urlConnection.setRequestProperty ("Authorization", basicAuth);
+                    // Open the connection
                     try {
                         // Implementation of the buffer to read element
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
