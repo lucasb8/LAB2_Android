@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +22,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
+    Boolean internResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +63,23 @@ public class MainActivity extends AppCompatActivity {
                         // Print the data
                         Log.i("JFL", s);
 
+                        // Creation of an JSON Object
+                        final JSONObject res = new JSONObject(s);
+                        // Call the existing method getBoolean of the JSONObject
+                        internResult = res.getBoolean("authenticated");
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // Test to print My result when the usr press the button
-                                String content = "My result";
-                                result.setText(content);
+                                // Print the result of the connection when the usr press the button
+                                result.setText(internResult ? "You are connected" : "You are not connected");
                             }
                         });
                     } finally {
                         // Close the connection at the end of the usage
                         urlConnection.disconnect();
                     }
-                } catch (IOException e) {
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
