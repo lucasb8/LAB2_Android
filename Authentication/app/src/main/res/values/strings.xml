@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Authentication</string>
+    <string name="textview">TextView</string>
+    <string name="login">Login :</string>
+    <string name="name">Name</string>
+    <string name="loginHint">login</string>
+    <string name="password">Password :</string>
+    <string name="passwordHint">password</string>
+    <string name="authenticate">Authenticate</string>
+</resources>
