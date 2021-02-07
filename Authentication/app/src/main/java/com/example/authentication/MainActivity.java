@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText login = findViewById(R.id.login);
         // Retrieve the password enter by the user
         final EditText password = findViewById(R.id.password);
+        // Retrieve the result TextView
+        final TextView result = findViewById(R.id.result);
 
         // Creation of the thread
         new Thread() {
@@ -46,14 +48,25 @@ public class MainActivity extends AppCompatActivity {
                     String basicAuth = "Basic " + Base64.encodeToString((login.getText() + ":"
                             + password.getText()).getBytes(), Base64.NO_WRAP);
                     urlConnection.setRequestProperty ("Authorization", basicAuth);
+
                     // Open the connection
                     try {
                         // Implementation of the buffer to read element
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
                         // Stock the data in a string
                         String s = readStream(in);
                         // Print the data
                         Log.i("JFL", s);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Test to print My result when the usr press the button
+                                String content = "My result";
+                                result.setText(content);
+                            }
+                        });
                     } finally {
                         // Close the connection at the end of the usage
                         urlConnection.disconnect();
