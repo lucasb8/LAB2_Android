@@ -23,5 +23,12 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/index"
             android:contentDescription="@string/todo" />
+
+        <Button
+            android:id="@+id/GoToList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onGoList"
+            android:text="@string/button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
