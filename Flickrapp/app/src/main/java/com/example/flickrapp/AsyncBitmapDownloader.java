@@ -26,13 +26,17 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected Bitmap doInBackground(String... strings) {
+        // Initiate the Bitmap and the URL
         Bitmap bm = null;
         URL url = null;
+
+        // Retrieve the URL thanks to the parameter
         try {
             url = new URL(strings[0]);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        // Creation of the connection
         HttpsURLConnection urlConnection = null;
         try {
             assert url != null;
@@ -43,6 +47,7 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
 
         try {
             assert urlConnection != null;
+            // Retrieve and decode the input stream
             InputStream is = new BufferedInputStream(urlConnection.getInputStream());
             bm = BitmapFactory.decodeStream(is);
         } catch (IOException e) {
