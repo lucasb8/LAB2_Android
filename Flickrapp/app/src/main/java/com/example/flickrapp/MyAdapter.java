@@ -1,9 +1,11 @@
 package com.example.flickrapp;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.Vector;
 
@@ -13,11 +15,12 @@ public class MyAdapter extends BaseAdapter {
     private Vector<String> vector;
 
     // Constructor
-    public MyAdapter(Vector<String> vector) {
-        this.vector = vector;
+    public MyAdapter() {
+        this.vector = new Vector<>();
     }
 
-    public void dd(String url){
+
+    public void add(String url){
         // Store the URL
         vector.add(url);
 
@@ -42,6 +45,15 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+
+        // Inflate the layout
+        convertView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.textviewlayout, parent, false);
+        // Retrieve the urlText
+        TextView text = convertView.findViewById(R.id.urlText);
+        // Add url into the TextView
+        text.setText(vector.get(position));
+
+        return convertView;
     }
 }

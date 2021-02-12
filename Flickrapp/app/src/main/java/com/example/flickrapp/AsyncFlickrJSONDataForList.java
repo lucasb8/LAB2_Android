@@ -3,6 +3,7 @@ package com.example.flickrapp;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,13 +16,14 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
-    // Parameter of the class
-    private AsyncBitmapDownloader asyncBmp;
+public class AsyncFlickrJSONDataForList extends AsyncTask<String, Void, JSONObject> {
 
-    // Constructor of the class
-    AsyncFlickrJSONData(AsyncBitmapDownloader asyncBmp){
-        this.asyncBmp = asyncBmp;
+    // Creation of the parameters
+    private MyAdapter adapter;
+
+    // Constructor
+    public AsyncFlickrJSONDataForList(MyAdapter adapter) {
+        this.adapter = adapter;
     }
 
     @Override
@@ -54,13 +56,19 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
 
     protected void onPostExecute (JSONObject result){
         // Retrieve the image thanks to the path in the JSON document
-        String urlImage;
+        String urlImage = null;
         try {
-            urlImage = result.getJSONArray("items").getJSONObject(0).getJSONObject("media").getString("m");
-            // Print the URL image in the logcat
-            Log.i("JFL", urlImage);
-            // Execution of the asyncBitMap
-            asyncBmp.execute(urlImage);
+            JSONArray array = result.getJSONArray("items");
+
+            for(int i = 0; i < array.length(); i++) {
+                // retrieve the image urls
+                String imageUrl = array.getJSONObject(i).getJSONObject("media").getString("m");
+
+                // add the url to the adapter
+                adapter.add(imageUrl);
+            }
+            // Notify the modification on the adapter
+            adapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }

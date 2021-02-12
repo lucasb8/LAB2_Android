@@ -14,10 +14,13 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        adapter = new MyAdapter(vector);
+        adapter = new MyAdapter();
 
         // Retrieve the list view and link withe the adapter
         ListView list = findViewById(R.id.list);
         list.setAdapter(adapter);
+
+        // Creation of the asyncTask to retrieve images
+        new AsyncFlickrJSONDataForList(adapter).execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json&nojsoncallback=?");
     }
 }
