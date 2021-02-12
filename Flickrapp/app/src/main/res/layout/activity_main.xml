@@ -29,6 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onGoList"
-            android:text="@string/button" />
+            android:text="@string/go_to_list" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
