@@ -53,9 +53,9 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
     }
 
     protected void onPostExecute (JSONObject result){
-        // Retrieve the image thanks to the path in the JSON document
         String urlImage;
         try {
+            // Retrieve the image thanks to the path in the JSON document
             urlImage = result.getJSONArray("items").getJSONObject(0).getJSONObject("media").getString("m");
             // Print the URL image in the logcat
             Log.i("JFL", urlImage);

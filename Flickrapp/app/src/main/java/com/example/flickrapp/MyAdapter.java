@@ -1,5 +1,6 @@
 package com.example.flickrapp;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +21,7 @@ public class MyAdapter extends BaseAdapter {
     private Vector<String> vector;
 
     // Constructor
-    public MyAdapter() {
+    MyAdapter() {
         this.vector = new Vector<>();
     }
 
@@ -48,6 +49,7 @@ public class MyAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("ViewHolder")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -78,9 +80,7 @@ public class MyAdapter extends BaseAdapter {
 
 
         // create a response listener
-        Response.Listener<Bitmap> responseListener = bmp -> {
-            image.setImageBitmap(bmp);
-        };
+        Response.Listener<Bitmap> responseListener = image::setImageBitmap;
 
         // Create the image request
         ImageRequest request = new ImageRequest(stringURL, responseListener,

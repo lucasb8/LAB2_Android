@@ -39,7 +39,7 @@ public class AsyncFlickrJSONDataForList extends AsyncTask<String, Void, JSONObje
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 String s = readStream(in);
                 // Print the string of the InputStream
-                Log.i("JFL", s);
+                Log.e("JFL", s);
                 // Creation of the JSONObject
                 result = new JSONObject(s);
             } catch (JSONException | IOException e) {
