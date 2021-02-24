@@ -4,4 +4,6 @@
     <string name="todo">TODO</string>
     <string name="button">Button</string>
     <string name="go_to_list">Go to list</string>
+    <string name="preference">preference</string>
+    <string name="update">Update</string>
 </resources>
