@@ -14,6 +14,10 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        // Retrieve the preference
+        Bundle extras = getIntent().getExtras();
+        String preference = extras.getString("preference");
+
         adapter = new MyAdapter();
 
         // Retrieve the list view and link withe the adapter
@@ -21,6 +25,6 @@ public class ListActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
         // Creation of the asyncTask to retrieve images
-        new AsyncFlickrJSONDataForList(adapter).execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json&nojsoncallback=?");
+        new AsyncFlickrJSONDataForList(adapter).execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=" + preference + "&format=json&nojsoncallback=?");
     }
 }

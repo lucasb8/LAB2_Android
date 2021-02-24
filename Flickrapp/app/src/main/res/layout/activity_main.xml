@@ -27,4 +27,11 @@
         android:onClick="onGoList"
         android:text="@string/go_to_list" />
 
+    <Button
+        android:id="@+id/preferenceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onPreferenceButton"
+        android:text="@string/set_preference" />
+
 </LinearLayout>
